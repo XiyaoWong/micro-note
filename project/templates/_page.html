@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% block title %}{% endblock %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/codehilite/friendly.css') }}">
+  <script src="https://use.fontawesome.com/db3d24dd2a.js"></script>
+  <style>
+    .date {
+      display: inline-block;
+      float: right;
+    }
+
+    .i,
+    .i:hover {
+      border: none;
+    }
+    input[type=text], textarea{
+      width: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <a href="/" class="i" title="主页"><i class="fa fa-home fa-1g" aria-hidden="true"></i></a>
+  {% for msg in get_flashed_messages() %}
+  <center><mark>{{msg|safe}}</mark></center>
+  {% endfor %}
+  {% block content %}{% endblock %}
+</body>
+
+</html>

@@ -1,18 +1,24 @@
 from flask_wtf import FlaskForm
-from wtforms import BooleanField, StringField, TextField, SubmitField
-from wtforms.validators import DataRequired, EqualTo
+from wtforms import BooleanField, StringField, TextAreaField, SubmitField, PasswordField 
+from wtforms.validators import DataRequired, EqualTo, Length
+from flask_wtf.csrf import CsrfProtect
 
 
 class KeyForm(FlaskForm):
-    key = StringField(validators=[DataRequired()])
-
+    key = PasswordField(label='密码', validators=[Length(min=6, message='密码必须6位字符以上'), DataRequired()])
+    submit = SubmitField(label='确认')
 
 class ChangeKeyForm(FlaskForm):
-    key = StringField(validators=[DataRequired()])
-    ckey = EqualTo('key', '两次输入密码不一致')
+    key = PasswordField(label='密码', validators=[Length(min=6, message='密码必须6位字符以上'), DataRequired()])
+    ckey = PasswordField(label='确认密码', validators=[Length(min=6), EqualTo('key', '两次输入密码不一致')])
+    submit = SubmitField(label='确认')
 
 
 class PostForm(FlaskForm):
-    title = StringField(validators=[DataRequired()])
-    content = TextField()
-    is_public = BooleanField()
+    title = StringField(label='标题', validators=[DataRequired()])
+    content = TextAreaField(label='正文')
+    is_public = BooleanField(label='是否公开')
+    submit = SubmitField(label='确认')
+
+
+csrf = CsrfProtect()

@@ -1,0 +1,15 @@
+{%extends "_page.html" %}
+
+{%block title%}
+<title>登陆</title>
+{%endblock%}
+{%block content%}
+<div class="container">
+    <form action="" method="POST">
+    {{ form.csrf_token }}
+    {{form.key.label}}
+    {{form.key}}
+    {{form.submit}}
+</form>
+</div>
+{%endblock%}

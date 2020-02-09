@@ -1,6 +1,9 @@
-from peewee import Model, SqliteDatabase, CharField, TextField, DateTimeField, BooleanField
+import getpass
 
-from .config import DATABASE
+from peewee import Model, SqliteDatabase, CharField, TextField, DateTimeField, BooleanField
+from werkzeug.security import generate_password_hash
+
+from config import DATABASE
 
 
 database = SqliteDatabase(DATABASE)
@@ -25,3 +28,9 @@ class Post(BaseModel):
 def create_tables():
     with database:
         database.create_tables([Key, Post])
+    
+    key = getpass.getpass('第一次创建数据库，请设置密码：')
+    key = generate_password_hash(key)
+    database.connect()
+    Key.create(key=key)
+    database.close()

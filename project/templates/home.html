@@ -1,0 +1,21 @@
+{% extends "_page.html" %}
+{% block title %}
+<title>😊😃😛😁</title>
+{% endblock %}
+{% block content %}
+
+<div class="container">
+  <center>
+    <h3>WongXY</h3>
+  </center>
+  <a href="{{url_for('add')}}" class="i" title='添加文章'><i class="fa fa-plus-circle fa-2g"></i></a>
+  {% if posts %}
+  <ol>
+    {% for post in posts %}
+    <li><a href="/detail/{{post.id}}" title="{{post.content[:50]}}">{{post.title}}</a><span class="date">{{post.pub_date}}</span></li>
+    {% endfor %}
+  </ol>
+  {% endif %}
+</div>
+
+{% endblock %}
