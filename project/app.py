@@ -19,3 +19,5 @@ def create_app() -> Flask:
     csrf.init_app(app)
 
     return app
+
+app = create_app()
