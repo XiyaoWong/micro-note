@@ -44,9 +44,10 @@ def login():
     return render_template('login.html', form=form)
 
 
-# def logout():
-#     session.pop('logged_in', None)
-#     return redirect(url_for('home'))
+@login_required
+def logout():
+    session.pop('logged_in', None)
+    return redirect(url_for('home'))
 
 
 def home():
@@ -112,14 +113,15 @@ def add():
 @login_required
 def change_key():
     form = ChangeKeyForm()
-    if request.method == 'POST' and form.validate_on_submit():
-        key = Key.get_by_id(1)
-        key.key = form.ckey.data
-        key.save()
-        flash('<script>alert("密码修改成功")</script>')
-        return redirect(url_for('home'))
-    else:
-        flash('<script>alert("密码修改失败，请确保两次输入一致")</script>')
+    if request.method == 'POST':
+        if form.validate_on_submit():
+            key = Key.get_by_id(1)
+            key.key = form.ckey.data
+            key.save()
+            flash('<script>alert("密码修改成功")</script>')
+            return redirect(url_for('home'))
+        else:
+            flash('<script>alert("密码修改失败，请确保两次输入一致")</script>')
     return render_template('change_key.html', form=form)
 
 
@@ -148,12 +150,17 @@ def not_found(error: Exception) -> (str, int):
 
 
 def _jinja2_filter_datetime(date, fmt=None):
-    
-    format='%Y-%m-%d'
-    return date.strftime(format)
+    format_='%Y-%m-%d'
+    return date.strftime(format_)
 
 
 def init_app(app: Flask) -> None:
+    @app.context_processor
+    def _inject_logged_in(): # 是否已登录
+        logged_in = session.get('logged_in', False)
+        return dict(logged_in=logged_in)
+
+
     app.add_url_rule('/', 'home', home)
     app.add_url_rule('/favicon.ico', 'favicon', favicon)
     app.add_url_rule('/add', 'add', add, methods=['GET', 'POST'])
@@ -161,6 +168,7 @@ def init_app(app: Flask) -> None:
     app.add_url_rule('/update/<int:id>', 'update', update, methods=['GET', 'POST'])
     app.add_url_rule('/detail/<int:id>', 'detail', detail)
     app.add_url_rule('/login', 'login', login, methods=['GET', 'POST'])
+    app.add_url_rule('/logout', 'logout', logout)
     app.add_url_rule('/change_key', 'change_key', change_key, methods=['GET', 'POST'])
     app.add_url_rule('/about', 'about', about)
 

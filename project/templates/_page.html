@@ -26,6 +26,12 @@
 
 <body>
   <a href="/" class="i" title="主页"><i class="fa fa-home fa-1g" aria-hidden="true"></i></a>
+  {% if not logged_in %}
+  <a href="/login" class="i" title="认证"><i class="fa fa-key fa-1g" aria-hidden="true"></i></a>
+  {% else %}
+  <a href="/logout" class="i" title="注销认证"><i class="fa fa-sign-out fa-1g" aria-hidden="true"></i></a>
+  {% endif %}
+  
   {% for msg in get_flashed_messages() %}
   <center><mark>{{msg|safe}}</mark></center>
   {% endfor %}

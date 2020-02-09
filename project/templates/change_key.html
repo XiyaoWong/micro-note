@@ -8,7 +8,7 @@
     <form action="" method="POST">
     {{form.csrf_token}}
     {{form.key.label}}
-    {{form.key}}
+    {{form.key(placeholder="6位以上字符")}}
     {{form.ckey.label}}
     {{form.ckey}}
     {{form.submit}}

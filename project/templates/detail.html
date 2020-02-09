@@ -4,9 +4,12 @@
 {% endblock %}
 {% block content %}
 
-<a class="i" style="display: none;float:right;" href="/delete/{{post.id}}"><i class="fa fa-trash-o fa-1g"
+{% if logged_in %}
+<sub><a class="i" style="color:red;float:right;" href="/delete/{{post.id}}"><i class="fa fa-trash-o fa-1g"
+      aria-hidden="true"></i></a></sub>
+<a class="i" href="/update/{{post.id}}" title="修改此篇文章"><i class="fa fa-pencil-square-o fa-1g"
     aria-hidden="true"></i></a>
-<a class="i" href="/update/{{post.id}}"><i class="fa fa-pencil-square-o fa-1g" aria-hidden="true"></i></a>
+{% endif %}
 <div class="container">
   <h2>{{post.title}}</h2>
   <span><em>{{post.pub_date}}</em></span>

@@ -5,12 +5,12 @@ from flask_wtf.csrf import CsrfProtect
 
 
 class KeyForm(FlaskForm):
-    key = PasswordField(label='密码', validators=[Length(min=6, message='密码必须6位字符以上'), DataRequired()])
+    key = PasswordField(label='密码', validators=[Length(min=6), DataRequired()])
     submit = SubmitField(label='确认')
 
 class ChangeKeyForm(FlaskForm):
-    key = PasswordField(label='密码', validators=[Length(min=6, message='密码必须6位字符以上'), DataRequired()])
-    ckey = PasswordField(label='确认密码', validators=[Length(min=6), EqualTo('key', '两次输入密码不一致')])
+    key = PasswordField(label='密码', validators=[Length(min=6), DataRequired()])
+    ckey = PasswordField(label='确认密码', validators=[Length(min=6), EqualTo('key'), DataRequired()])
     submit = SubmitField(label='确认')
 
 

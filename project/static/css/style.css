@@ -29,6 +29,7 @@
 /* Grid
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 @import url(https://fonts.googleapis.com/css?family=Noto+Serif+SC:300&display=swap&subset=chinese-simplified);
+@import url(https://fonts.googleapis.com/css?family=Long+Cang&display=swap);
 
 .container {
   position: relative;
@@ -128,7 +129,7 @@ body {
   font-size: 1.5em; /* currently ems cause chrome bug misinterpreting rems on body element */
   line-height: 1.6;
   font-weight: 400;
-  font-family: "Noto Serif SC", "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Noto Serif SC", "Long Cang", "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #222; }
 
 

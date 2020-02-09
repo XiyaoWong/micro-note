@@ -6,13 +6,15 @@
 
 <div class="container">
   <center>
-    <h3>WongXY</h3>
+    <h3>WongXY<i class="fa fa-smile-o fa-1g"></i></h3>
   </center>
-  <a href="{{url_for('add')}}" class="i" title='添加文章'><i class="fa fa-plus-circle fa-2g"></i></a>
+  {% if logged_in %}
+  <a href="{{url_for('add')}}" class="i" title='添加文章'><i class="fa fa-plus-circle fa-1g"></i></a>
+  {% endif %}
   {% if posts %}
   <ol>
     {% for post in posts %}
-    <li><a href="/detail/{{post.id}}" title="{{post.content[:50]}}">{{post.title}}</a><span class="date">{{post.pub_date|strftime}}</span></li>
+    <li><a href="/detail/{{post.id}}" title="{{post.content[:50]}}">{{post.title}}</a><span class="date" title="{{post.pub_date}}">{{post.pub_date|strftime}}</span></li>
     {% endfor %}
   </ol>
   {% endif %}
