@@ -147,6 +147,12 @@ def not_found(error: Exception) -> (str, int):
     return render_template("404.html"), 404
 
 
+def _jinja2_filter_datetime(date, fmt=None):
+    
+    format='%Y-%m-%d'
+    return date.strftime(format)
+
+
 def init_app(app: Flask) -> None:
     app.add_url_rule('/', 'home', home)
     app.add_url_rule('/favicon.ico', 'favicon', favicon)
@@ -160,5 +166,7 @@ def init_app(app: Flask) -> None:
 
     app.before_request(before_request)
     app.after_request(after_request)
+    
+    app.add_template_filter(_jinja2_filter_datetime, 'strftime')
     
     app.register_error_handler(404, not_found)
