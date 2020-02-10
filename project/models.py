@@ -29,8 +29,8 @@ def create_tables():
     with database:
         database.create_tables([Key, Post])
     
-    key = getpass.getpass('第一次创建数据库，请设置密码：')
-    key = generate_password_hash(key)
+    key = generate_password_hash('123456')
     database.connect()
     Key.create(key=key)
     database.close()
+    print('首次创建数据库，默认密码为123456，请尽快修改！')
