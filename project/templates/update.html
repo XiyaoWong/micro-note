@@ -13,7 +13,7 @@
     {{form.content.label}}
     <textarea name="content" id="" cols="30" rows="10" style="height: 400px;">{{post.content|safe}}</textarea>
     {{form.is_public.label}}
-    <input type="checkbox" checked={{post.is_public}}>
+    <input type="checkbox" name="is_public" {{checked}}>
     <br/>
     {{form.submit(class='button button-primary')}}
 </form>

@@ -73,6 +73,7 @@ def detail(id: int):
 @login_required
 def update(id: int):
     post = get_object_by_id_or_404(Post, id=id)
+    checked = "checked" if post.is_public else ""
     form = PostForm()
     if request.method == 'POST':
         if form.validate_on_submit:
@@ -80,11 +81,12 @@ def update(id: int):
                 post.title = form.title.data
                 post.content = form.content.data
                 post.is_public = form.is_public.data
+                print(form.is_public.data)
                 post.pub_time = datetime.datetime.now()
                 post.save()
                 return redirect(url_for('detail', id=post.id))
-    return render_template('update.html', post=post, form=form)
-    
+    return render_template('update.html', post=post, form=form, checked=checked)
+
 
 @login_required
 def delete(id: int):
@@ -105,8 +107,9 @@ def add():
                 content = form.content.data,
                 is_public = form.is_public.data,
                 pub_date = datetime.datetime.now(),)
-            return redirect(url_for('detail', id=post.id))
+            print(form.is_public.data)
             flash('<script>alert("添加成功")</script>')
+            return redirect(url_for('detail', id=post.id))
     return render_template('add.html', form=form)
 
 
@@ -174,7 +177,7 @@ def init_app(app: Flask) -> None:
 
     app.before_request(before_request)
     app.after_request(after_request)
-    
+
     app.add_template_filter(_jinja2_filter_datetime, 'strftime')
-    
+
     app.register_error_handler(404, not_found)
