@@ -35,10 +35,10 @@ def login():
     form = KeyForm()
     if request.method == 'POST' and form.validate_on_submit():
         key = form.key.data
-        # print(key)
+        print(key)
         if check_password_hash(Key.get_by_id(1).key, key):
-            # print(Key.get_by_id(1).key)
-            # print(check_password_hash(Key.get_by_id(1).key, key))
+            print(Key.get_by_id(1).key)
+            print(check_password_hash(Key.get_by_id(1).key, key))
             session['logged_in'] = True
             flash('<script>alert("登陆认证成功")</script>')
             return redirect(url_for('home'))
