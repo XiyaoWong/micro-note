@@ -117,7 +117,7 @@ def change_key():
     if request.method == 'POST':
         if form.validate_on_submit():
             key = Key.get_by_id(1)
-            key.key = form.ckey.data
+            key.key = generate_password_hash(form.ckey.data)
             key.save()
             flash('<script>alert("密码修改成功")</script>')
             return redirect(url_for('home'))
