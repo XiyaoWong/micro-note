@@ -35,10 +35,7 @@ def login():
     form = KeyForm()
     if request.method == 'POST' and form.validate_on_submit():
         key = form.key.data
-        print(key)
         if check_password_hash(Key.get_by_id(1).key, key):
-            print(Key.get_by_id(1).key)
-            print(check_password_hash(Key.get_by_id(1).key, key))
             session['logged_in'] = True
             flash('<script>alert("登陆认证成功")</script>')
             return redirect(url_for('home'))
@@ -84,7 +81,6 @@ def update(id: int):
                 post.title = form.title.data
                 post.content = form.content.data
                 post.is_public = form.is_public.data
-                # print(form.is_public.data)
                 post.pub_time = datetime.datetime.now()
                 post.save()
                 return redirect(url_for('detail', id=post.id))
@@ -110,7 +106,6 @@ def add():
                 content = form.content.data,
                 is_public = form.is_public.data,
                 pub_date = datetime.datetime.now(),)
-            # print(form.is_public.data)
             flash('<script>alert("添加成功")</script>')
             return redirect(url_for('detail', id=post.id))
     return render_template('add.html', form=form)

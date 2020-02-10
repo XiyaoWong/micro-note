@@ -1,7 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import BooleanField, StringField, TextAreaField, SubmitField, PasswordField 
 from wtforms.validators import DataRequired, EqualTo, Length
-# from flask_wtf.csrf import CsrfProtect
 
 
 class KeyForm(FlaskForm):
@@ -21,5 +20,3 @@ class PostForm(FlaskForm):
     is_public = BooleanField(label='是否公开')
     submit = SubmitField(label='确认')
 
-
-# csrf = CsrfProtect()
