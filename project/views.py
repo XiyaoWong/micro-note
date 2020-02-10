@@ -81,7 +81,7 @@ def update(id: int):
                 post.title = form.title.data
                 post.content = form.content.data
                 post.is_public = form.is_public.data
-                print(form.is_public.data)
+                # print(form.is_public.data)
                 post.pub_time = datetime.datetime.now()
                 post.save()
                 return redirect(url_for('detail', id=post.id))
@@ -107,7 +107,7 @@ def add():
                 content = form.content.data,
                 is_public = form.is_public.data,
                 pub_date = datetime.datetime.now(),)
-            print(form.is_public.data)
+            # print(form.is_public.data)
             flash('<script>alert("添加成功")</script>')
             return redirect(url_for('detail', id=post.id))
     return render_template('add.html', form=form)
