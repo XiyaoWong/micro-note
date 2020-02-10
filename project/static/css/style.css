@@ -132,6 +132,11 @@ body {
   font-family: "Noto Serif SC", "Long Cang", "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #222; }
 
+/* Media
+-------------------------------------------------- */
+img{
+max-width: 100%;
+margin: 5px auto;}
 
 /* Typography
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
