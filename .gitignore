@@ -131,4 +131,4 @@ dmypy.json
 .swp
 .db
 project/MicroNote.db
-project/config.py
+.vscode/settings.json
